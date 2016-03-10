@@ -1,6 +1,6 @@
-class UsertasksController < ApplicationController
-  before_action :set_usertask, only: [:show, :edit, :update, :destroy]
-
+class UserTasksController < ApplicationController
+  before_action :all_tasks, only: [:index, :create, :update, :destroy]
+  before_action :set_user_task, only: [:show, :edit, :update, :destroy]
   # GET /usertasks
   # GET /usertasks.json
   def index
@@ -29,9 +29,11 @@ class UsertasksController < ApplicationController
     respond_to do |format|
       if @usertask.save
         format.html { redirect_to @usertask, notice: 'Usertask was successfully created.' }
+        format.js {}
         format.json { render :show, status: :created, location: @usertask }
       else
         format.html { render :new }
+        format.js{render :new}
         format.json { render json: @usertask.errors, status: :unprocessable_entity }
       end
     end
@@ -72,3 +74,7 @@ class UsertasksController < ApplicationController
       params.require(:usertask).permit(:description, :due)
     end
 end
+private
+    def all_tasks
+      @user_tasks = UserTask.all
+    end
