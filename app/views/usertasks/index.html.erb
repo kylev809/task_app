@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Usertasks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Due</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @usertasks.each do |usertask| %>
+      <tr>
+        <td><%= usertask.description %></td>
+        <td><%= usertask.due %></td>
+        <td><%= link_to 'Show', usertask %></td>
+        <td><%= link_to 'Edit', edit_usertask_path(usertask) %></td>
+        <td><%= link_to 'Destroy', usertask, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User task', new_user_task_path, remote: true %>
+<div id= "task_form"></div>
